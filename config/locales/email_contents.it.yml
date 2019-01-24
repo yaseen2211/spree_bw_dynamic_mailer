@@ -1,0 +1,14 @@
+it:
+  spree:
+    admin:
+      tab:
+        email_contents: "Email Contents"
+    new_email_content: "Nuovo Email Content"
+    listing_email_contents: "Lista Email Contents"
+    editing_email_content: "Modifica Email Content"
+  activerecord:
+    attributes:
+      spree/email_content:
+        reason: Reason
+        module_name: Module Name
+        template: Template

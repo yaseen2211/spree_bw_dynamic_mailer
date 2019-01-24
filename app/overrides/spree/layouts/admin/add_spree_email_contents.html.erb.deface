@@ -1,0 +1,6 @@
+<!-- insert_bottom "[data-hook='admin_tabs']" -->
+<% if can? :admin, Spree::EmailContent %>
+  <ul class="nav nav-sidebar">
+    <%= tab(:email_contents, icon: "edit") %>
+  </ul>
+<% end %>

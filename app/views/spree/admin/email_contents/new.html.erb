@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:new_email_content) %>
+<% end %>
+
+<div data-hook="admin_email_content_new_form_header">
+  <%= render 'spree/shared/error_messages', target: @email_content %>
+</div>
+
+<div data-hook="admin_email_content_new_form">
+  <%= form_for [:admin, @email_content] do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'form', f: f %>
+        <%= render 'spree/admin/shared/new_resource_links' %>
+      </div>
+    </div>
+  <% end %>
+</div>
