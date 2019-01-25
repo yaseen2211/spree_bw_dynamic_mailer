@@ -5,8 +5,8 @@ class Spree::Email::EmailDynamic
 	def self.token_wrt_obj(obj_names)
   	token_arry = []
   	obj_names.each do |obj|
-	  	(obj.class.name.constantize.column_names - EXCLUDED_COLUMNS).each do |cn|
-	  		token_arry.push(obj.class.name.split('::').last.downcase + "-"+ cn)
+	  	(obj.constantize.column_names - EXCLUDED_COLUMNS).each do |cn|
+	  		token_arry.push("{:" + obj.split('::').last.downcase + "_"+ cn + "}")
 	  	end
 	  end
   	return token_arry
@@ -20,9 +20,10 @@ class Spree::Email::EmailDynamic
 
   		(e_obj.class.name.constantize.column_names - EXCLUDED_COLUMNS).each do |el|
   			next if e_obj.public_send(el).blank?
-   			@body.gsub!(e_obj.class.name.split("::").last.downcase + "-" + el, e_obj.public_send(el)) 
+   			@body.gsub!(e_obj.class.name.split("::").last.downcase + "_" + el, e_obj.public_send(el)) 
    		end
 	  end
 	  return @body
+
 	end
 end
