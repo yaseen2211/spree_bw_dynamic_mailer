@@ -31,6 +31,21 @@
         <% end %>
       </ol>
     </div>
+    <% detailed_token_list_names = (f.object.module_name.split('::').join('_').upcase.to_s + "_DETAILED_TOKENS")  %>
+
+    <% if detailed_token_list_names.safe_constantize.present? %>
+      <h4> Detailed Content Tokens </h4>
+      <div style="background-color: white;height: 100px;overflow-y: scroll;">
+        
+        <ol>
+          <% detailed_token_list_names.constantize.each do |at| %>
+            <li><%= at %></li>
+          <% end %>
+        </ol>
+      </div>
+    <% end %>
+
+
   </div>
 </div>
 
