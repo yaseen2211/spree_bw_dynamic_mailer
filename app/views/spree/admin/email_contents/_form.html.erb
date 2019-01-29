@@ -1,5 +1,5 @@
 <div data-hook="admin_email_content_form_fields" class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <%= f.field_container :subject, class: ['form-group'] do %>
       <%= f.label :subject %>
       <%= f.text_field :subject, class: 'form-control' %>
@@ -16,20 +16,20 @@
     
     <%= f.field_container :template, class: ['form-group'] do %>
       <%= f.label :template %>
-      <%= f.text_area :template, class: 'form-control' %>
+      <%= f.cktext_area :template, class: 'form-control' %>
       <%= error_message_on :email_content, :template %>
     <% end %>
 
   </div>
-  <div class="col-md-6" >
-    <h4> Available Tokens </h4>
+  <div class="col-md-4" >
+    <h4> Single Content Tokens </h4>
     <div style="background-color: white;height: 255px;overflow-y: scroll;">
       <% available_tokens = Spree::Email::EmailDynamic.token_wrt_obj(f.object.module_name.split(','))%>
-      <ol>
+      <ul>
         <% available_tokens.each do |at| %>
-          <li><%= at %></li>
+          <li style="font-size: 12px;"><%= at %></li>
         <% end %>
-      </ol>
+      </ul>
     </div>
     <% detailed_token_list_names = (f.object.module_name.split('::').join('_').upcase.to_s + "_DETAILED_TOKENS")  %>
 
@@ -37,11 +37,11 @@
       <h4> Detailed Content Tokens </h4>
       <div style="background-color: white;height: 100px;overflow-y: scroll;">
         
-        <ol>
+        <ul>
           <% detailed_token_list_names.constantize.each do |at| %>
-            <li><%= at %></li>
+            <li style="font-size: 12px;"><%= "{:" + at + "}" %></li>
           <% end %>
-        </ol>
+        </ul>
       </div>
     <% end %>
 
