@@ -51,9 +51,20 @@ Copyright (c) 2019 [name of extension creator], released under the New BSD Licen
 
 
 
-5. Gems Installation Instructio
+5. Gems Installation Instruction
 
-  Please Add these two gems in your main extension
+1)
 
-  gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
-  gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
+Please ad these gem into your gem file
+
+gem 'spree_bw_dynamic_mailer', github: '[your-github-handle]/spree_bw_dynamic_mailer'
+
+gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
+gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
+
+2)
+
+
+Then run
+
+bundle install
