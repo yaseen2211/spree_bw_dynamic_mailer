@@ -6,7 +6,7 @@ Introduction goes here.
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'spree_bw_dynamic_mailer', github: '[your-github-handle]/spree_bw_dynamic_mailer'
+  gem 'spree_bw_dynamic_mailer', github: 'omairrazam/spree_bw_dynamic_mailer'
   ```
   ```ruby
   gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
