@@ -1,0 +1,43 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_email_contents) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_email_content), new_object_url, class: 'btn-success', icon: 'add', id: 'admin_new_email_content_link' %>
+<% end if can?(:create, Spree::EmailContent) %>
+
+<table class="table" id="listing_email_contents" data-hook>
+  <thead>
+    <tr data-hook="admin_email_contents_index_headers">
+      <th><%= t(:subject, scope: 'activerecord.attributes.spree/email_content') %></th>
+      <th><%= t(:module_name, scope: 'activerecord.attributes.spree/email_content') %></th>
+      <th data-hook="admin_email_contents_index_header_actions" class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @email_contents.each do |email_content| %>
+      <tr id="<%= spree_dom_id email_content %>" data-hook="admin_email_contents_index_rows" class="<%= cycle('odd', 'even')%>">
+        <td><%= link_to email_content.subject, edit_object_url(email_content) %></td>
+        <td><%= email_content.module_name %></td>
+        <td data-hook="admin_email_contents_index_row_actions" class="actions text-right">
+          <%= link_to_edit email_content, no_text: true %>
+          <%= link_to_delete email_content, no_text: true %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @email_contents %>
+
+
+<% @email_contents.each do |email_content| %>
+  <tr id="<%= spree_dom_id email_content %>" data-hook="admin_email_contents_index_rows" class="<%= cycle('odd', 'even')%>">
+    <td><%= link_to email_content.subject, edit_object_url(email_content) %></td>
+    <td><%= email_content.module_name %></td>
+    <td data-hook="admin_email_contents_index_row_actions" class="actions text-right">
+      <%= link_to_edit email_content, no_text: true %>
+      <%= link_to_delete email_content, no_text: true %>
+    </td>
+  </tr>
+<% end %>

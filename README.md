@@ -47,3 +47,13 @@ If you'd like to contribute, please take a look at the
 pull request.
 
 Copyright (c) 2019 [name of extension creator], released under the New BSD License
+
+
+
+
+5. Gems Installation Instructio
+
+  Please Add these two gems in your main extension
+
+  gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
+  gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'

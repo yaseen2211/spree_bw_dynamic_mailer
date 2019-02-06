@@ -1,31 +1,42 @@
+<!------ Include the above in your HEAD tag ---------->
+
 <% content_for :page_title do %>
   <%= Spree.t(:listing_email_contents) %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <%= button_link_to Spree.t(:new_email_content), new_object_url, class: 'btn-success', icon: 'add', id: 'admin_new_email_content_link' %>
-<% end if can?(:create, Spree::EmailContent) %>
+<%# content_for :page_actions do %>
+  <%#= button_link_to Spree.t(:new_email_content), new_object_url, class: 'btn-success', icon: 'add', id: 'admin_new_email_content_link' %>
+<%# end if can?(:create, Spree::EmailContent) %>
 
-<table class="table" id="listing_email_contents" data-hook>
-  <thead>
-    <tr data-hook="admin_email_contents_index_headers">
-      <th><%= t(:reason, scope: 'activerecord.attributes.spree/email_content') %></th>
-      <th><%= t(:module_name, scope: 'activerecord.attributes.spree/email_content') %></th>
-      <th data-hook="admin_email_contents_index_header_actions" class="actions"></th>
-    </tr>
-  </thead>
-  <tbody>
+<div id="notice"></div>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked admin-menu">
+        <% @email_contents.each do |email_content,index| %>
+          <li class="<%= @email_contents.first == email_content ? "active" : ""%>"><a href="#" data-target-id="order-<%= email_content.id%>"><i class="fa fa-edit"></i> <%= email_content.subject %> </a></li>
+        <% end %>
+      </ul>
+    </div>
     <% @email_contents.each do |email_content| %>
-      <tr id="<%= spree_dom_id email_content %>" data-hook="admin_email_contents_index_rows" class="<%= cycle('odd', 'even')%>">
-        <td><%= link_to email_content.reason, edit_object_url(email_content) %></td>
-        <td><%= email_content.module_name %></td>
-        <td data-hook="admin_email_contents_index_row_actions" class="actions text-right">
-          <%= link_to_edit email_content, no_text: true %>
-          <%= link_to_delete email_content, no_text: true %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= paginate @email_contents %>
+      <div class="col-md-9 well admin-content" id="order-<%= email_content.id%>">
+
+        <div data-hook="admin_email_content_edit_form_header">
+          <%= render 'spree/shared/error_messages', target: email_content %>
+        </div>
+
+        <div data-hook="admin_email_content_edit_form">
+          <%= form_for [:admin, email_content], remote: true do |f| %>
+            <div class="row">
+              <div class="col-md-12">
+                <%= render 'form', f: f %>
+                <%= render 'spree/admin/shared/edit_resource_links' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

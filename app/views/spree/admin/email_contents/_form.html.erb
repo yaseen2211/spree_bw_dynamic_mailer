@@ -1,26 +1,50 @@
 <div data-hook="admin_email_content_form_fields" class="row">
-  <div class="col-md-6">
-    <%= f.field_container :reason, class: ['form-group'] do %>
-      <%= f.label :reason %>
-      <%= f.text_field :reason, class: 'form-control' %>
-      <%= error_message_on :email_content, :reason %>
+  <div class="col-md-8">
+    <%= f.field_container :subject, class: ['form-group'] do %>
+      <%= f.label :subject %>
+      <%= f.text_field :subject, class: 'form-control' %>
+      <%= error_message_on :email_content, :subject %>
     <% end %>
 
     <%= f.field_container :module_name, class: ['form-group'] do %>
-      <%= f.label :module_name %>
-      <%= select_tag :module_name, options_for_select(Spree::EmailContent.module_names.map {|k, v| [k.humanize.capitalize, v]}),class: ['form-control']  %>
+      <%= f.label :module_name %> : 
+      <%= f.object.module_name %>
+      <%#= select_tag :module_name, options_for_select(Spree::EmailContent.module_names.map {|k, v| [k.humanize.capitalize, v]}),class: ['form-control']  %>
 
-      <%= error_message_on :email_content, :module_name %>
+      <%#= error_message_on :email_content, :module_name %>
     <% end %>
-    <p> Available Tokens </p>
-
-    <%= Spree::Email::EmailDynamic.token_wrt_obj([f])%>
-
+    
     <%= f.field_container :template, class: ['form-group'] do %>
       <%= f.label :template %>
-      <%= f.text_area :template, class: 'form-control' %>
+      <%= f.cktext_area :template, class: 'form-control' %>
       <%= error_message_on :email_content, :template %>
     <% end %>
+
+  </div>
+  <div class="col-md-4" >
+    <h4> Single Content Tokens </h4>
+    <div style="background-color: white;height: 255px;overflow-y: scroll;">
+      <% available_tokens = Spree::Email::EmailDynamic.token_wrt_obj(f.object.module_name.split(','))%>
+      <ul>
+        <% available_tokens.each do |at| %>
+          <li style="font-size: 12px;"><%= at %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% detailed_token_list_names = (f.object.module_name.split('::').join('_').upcase.to_s + "_DETAILED_TOKENS")  %>
+
+    <% if detailed_token_list_names.safe_constantize.present? %>
+      <h4> Detailed Content Tokens </h4>
+      <div style="background-color: white;height: 100px;overflow-y: scroll;">
+        
+        <ul>
+          <% detailed_token_list_names.constantize.each do |at| %>
+            <li style="font-size: 12px;"><%= "{:" + at + "}" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
 
   </div>
 </div>

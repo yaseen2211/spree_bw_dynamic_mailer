@@ -1,5 +1,5 @@
 module Spree
   class EmailContent < Spree::Base
-  	enum module_name: [:orders,:products,:welcome,:login,:registeration]
+  	scope :finder, -> (reason,module_name) {where("reason =? AND module_name =?", reason , module_name)}
   end
 end
