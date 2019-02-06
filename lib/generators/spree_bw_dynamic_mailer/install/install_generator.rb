@@ -17,6 +17,11 @@ module SpreeBwDynamicMailer
         run 'bundle exec rake railties:install:migrations FROM=spree_bw_dynamic_mailer'
       end
 
+
+      def load_seeds_files
+        SpreeBwDynamicMailer::Engine.load_seed
+      end
+
       def run_migrations
         run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask('Would you like to run the migrations now? [Y/n]'))
         if run_migrations
