@@ -8,6 +8,12 @@ Introduction goes here.
   ```ruby
   gem 'spree_bw_dynamic_mailer', github: '[your-github-handle]/spree_bw_dynamic_mailer'
   ```
+  ```ruby
+  gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
+  ```
+  ```ruby
+  gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
+  ```
 
 2. Install the gem using Bundler:
   ```ruby
@@ -47,24 +53,3 @@ If you'd like to contribute, please take a look at the
 pull request.
 
 Copyright (c) 2019 [name of extension creator], released under the New BSD License
-
-
-
-
-5. Gems Installation Instruction
-
-1)
-
-Please ad these gem into your gem file
-
-gem 'spree_bw_dynamic_mailer', github: '[your-github-handle]/spree_bw_dynamic_mailer'
-
-gem 'ckeditor', github: 'yaseen2211/ckeditor', branch: 'master'
-gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
-
-2)
-
-
-Then run
-
-bundle install
