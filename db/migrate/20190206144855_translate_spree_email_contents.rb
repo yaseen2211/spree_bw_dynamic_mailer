@@ -4,6 +4,6 @@ class TranslateSpreeEmailContents < ActiveRecord::Migration[5.2]
 	end
 
 	def  down 
-	  Spree::PageContent.drop_translation_table! 
+	  Spree::EmailContent.drop_translation_table! 
 	end
 end
