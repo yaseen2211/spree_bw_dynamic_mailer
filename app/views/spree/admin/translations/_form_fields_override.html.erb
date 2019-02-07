@@ -1,0 +1,65 @@
+<div id="attr_fields">
+  <% SpreeI18n::Config.available_locales.each do |locale| %>
+    <%= f.globalize_fields_for locale.to_sym do |g| %>
+      <% @resource.class.translated_attribute_names.each_with_index do |attr, i| %>
+        <div class="panel panel-default <%= attr %> <%= locale %>" style="display:<%= i == 0 ? 'auto' : 'none' %>;">
+          <div class="panel-heading">
+            <% I18n.with_locale(locale) do %>
+              <%= @resource.class.human_attribute_name(attr) %>
+
+              <div class="pull-right text-muted">
+                <small><i><%= Spree.t(:'i18n.this_file_language') %></i></small>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="panel-body">
+            <% field_type = @resource.class.translation_class.columns_hash[attr.to_s].type %>
+            <% if field_type == :text %>
+              <div class="col-md-7">
+                <%= g.cktext_area attr, class: 'form-control', rows: 4 %>
+              </div>
+              <div class="col-md-5" >
+                <div class="well" style="height: 255px;overflow-y: scroll;">
+                  <h4> Single Content Tokens </h4>
+
+                  <% available_tokens = Spree::Email::EmailDynamic.token_wrt_obj(f.object.module_name.split(','))%>
+                  <ul>
+                    <% available_tokens.each do |at| %>
+                      <li style="font-size: 12px;"><%= at %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <% detailed_token_list_names = (f.object.module_name.split('::').join('_').upcase.to_s + "_DETAILED_TOKENS")  %>
+
+                <% if detailed_token_list_names.safe_constantize.present? %>
+                 
+                  <div class="well" style="height: 100px;overflow-y: scroll;">
+                    <h4> Detailed Content Tokens </h4>
+                    <ul>
+                      <% detailed_token_list_names.constantize.each do |at| %>
+                        <li style="font-size: 12px;"><%= "{:" + at + "}" %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <%= g.text_field attr, class: 'form-control' %>
+            <% end %>
+
+
+
+
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <p class="no-translations" style="display: none">
+    <%= Spree.t(:'globalize.no_translations_for_criteria') %>
+  </p>
+</div>
+
+<hr/>

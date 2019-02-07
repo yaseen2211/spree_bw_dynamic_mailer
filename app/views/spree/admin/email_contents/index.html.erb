@@ -19,9 +19,11 @@
       </ul>
     </div>
     <% @email_contents.each do |email_content| %>
-
+      
       <div class="col-md-9 well admin-content" id="order-<%= email_content.id%>">
-
+        <% if email_content.persisted? %>
+          <%= link_to_with_icon 'translate', nil, spree.admin_translations_path('email_contents', email_content.id), title: Spree.t(:'i18n.translations'), class: 'btn btn-md btn-primary pull-right' %>
+        <% end %>
         <div data-hook="admin_email_content_edit_form_header">
           <%= render 'spree/shared/error_messages', target: email_content %>
         </div>

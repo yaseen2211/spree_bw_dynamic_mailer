@@ -1,1 +1,1 @@
-Spree::EmailContent.find_or_create_by! subject: "Order Confirmation Mail",reason: "Order", module_name: "Spree::Order", template: "Order Confirmation Email Content"
+Spree::EmailContent.find_or_create_by! subject: "Order Confirmation Mail",reason: "order-complete", module_name: "Spree::Order", template: "Dear Customer, Thanks for order completion. Your order have an id {:order_number} will be deliverd soon. Your order is  {:order_state} and have an total {:order_total}.Below is the total summary of order as well. Details:{:order_details}Thanks. Catch you soon."

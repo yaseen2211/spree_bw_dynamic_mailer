@@ -16,7 +16,7 @@
     
     <%= f.field_container :template, class: ['form-group'] do %>
       <%= f.label :template %>
-      <%= f.cktext_area :template, class: 'form-control' %>
+      <%= f.cktext_area :template, class: 'form-control',id: "ck_area_#{f.object.id}" %>
       <%= error_message_on :email_content, :template %>
     <% end %>
 
@@ -44,8 +44,6 @@
         </ul>
       </div>
     <% end %>
-
-
   </div>
 </div>
 
