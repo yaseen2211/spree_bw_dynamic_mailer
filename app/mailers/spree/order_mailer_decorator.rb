@@ -4,7 +4,7 @@ Spree::OrderMailer.class_eval do
     @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
     finder_obj = Spree::Email::EmailDynamic.finder("order-complete","Spree::Order")
     finder_obj.translations.inspect
-    I18n.locale = :es
+    I18n.locale = :en
     subject = finder_obj.subject
     single_replace_temp = Spree::Email::EmailDynamic.make_dynamic([@order],finder_obj.template)
     partial_hash = {"order_details" => {:order => Spree::Order.last, :product => Spree::Product.last}}
