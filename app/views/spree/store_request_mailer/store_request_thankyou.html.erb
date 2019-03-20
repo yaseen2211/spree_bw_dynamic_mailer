@@ -1,0 +1,25 @@
+
+<div>
+	<p>Dear Admin, A new vendor registeration request is waiting for you from: <%= @request_info.try(:contact_name)%>. Please create a vendor for <%= @request_info.try(:contact_name)%> according to the provided details. Please see the details below:</p>
+
+	<p> Details provide by: <%= @request_info.try(:contact_name)%>
+	<table style="width:100%">
+	  <tr>
+	    <th>Contact Name</th>
+	    <th>Contact Number</th> 
+	    <th>Email Address</th>
+	    <th>Store Name</th>
+	    <th>Store WebStore</th>
+	    <th>Store Social Media</th>
+
+	  </tr>
+	  <tr>
+	    <td><%= @request_info.try(:contact_name)%></td>
+	    <td><%= @request_info.try(:contact_number)%></td> 
+	    <td><%= @request_info.try(:contact_email_address)%></td>
+	    <td><%= @request_info.try(:store_name)%></td>
+	    <td><%= @request_info.try(:store_web_url)%></td> 
+	    <td><%= @request_info.try(:store_social_media)%></td>
+	  </tr>
+	</table>
+</div>
