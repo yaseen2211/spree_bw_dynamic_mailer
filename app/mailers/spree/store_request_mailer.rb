@@ -1,6 +1,6 @@
 class Spree::StoreRequestMailer < ApplicationMailer
 
-	def store_request_thankyou(store_request)
+	def response_to_admin(store_request)
 		@request_info = store_request
 		mail(to: "omsolutionpk@gmail.com", subject: "Vendor Registeration Request.")
 	end
