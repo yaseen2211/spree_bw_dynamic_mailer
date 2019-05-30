@@ -8,14 +8,14 @@ Spree::UserMailer.class_eval do
     I18n.locale = :en
     subject = finder_obj.subject
     @single_replace_temp = Spree::Email::EmailDynamic.make_dynamic([@user],finder_obj.template)
-    mail(to: @user.email, from: from_address, subject: subject)
+    mail(to: @user.email, from: from_address, subject: "Welcome to Black-Line Your Number One Abaya Destination", bcc: BCC_EMAILS)
   end
 
 
   def vendor_welcome(user, token)
     @vendor_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: Spree::Store.current.url)
     @user = user
-    mail(to: @user.email, from: from_address, subject: "Request for Change Account Credentials")
+    mail(to: @user.email, from: from_address, subject: "Black-Line, Request for Change Account Credentials", bcc: BCC_EMAILS)
   end
 
 
