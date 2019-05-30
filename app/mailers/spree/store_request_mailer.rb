@@ -1,4 +1,4 @@
-class Spree::StoreRequestMailer < BaseMailer
+class Spree::StoreRequestMailer < ApplicationMailer
 
 	def response_to_admin(store_request)
 		@request_info = store_request
