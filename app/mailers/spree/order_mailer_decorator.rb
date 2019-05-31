@@ -10,7 +10,7 @@ Spree::OrderMailer.class_eval do
     partial_hash = {"order_details" => {:order => Spree::Order.last, :product => Spree::Product.last}}
     @replaced_temp =  Spree::Email::EmailDynamic.detailed_dynamic(partial_hash, single_replace_temp,'/spree/order_mailer/')
 
-    mail(to: @order.email, from: from_address, subject: "Black-Line Order Confirmation <%= @order.number %>", bcc: BCC_EMAILS )
+    mail(to: @order.email, from: from_address, subject: "Black-Line Order Confirmation #{@order.number}", bcc: BCC_EMAILS )
   end
 
 end
