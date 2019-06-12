@@ -1,4 +1,3 @@
-
 <% Globalize.with_locale (:es) do %> 
   <table class="row header">
     <tr>
@@ -12,22 +11,16 @@
             <td class="wrapper last">
               <table class="twelve columns">
 
-                <% order.line_items.each do |line_item| %>
-                  <tr>
-                    <td class="six sub-columns">
-                      <strong>
-                        <%= raw(line_item.variant.product.name) %>
-                      </strong>
-                      <%= raw(line_item.variant.options_text) -%>
-                      (<%= line_item.variant.sku %>)
-                    </td>
-                    <td class="six sub-columns last right">
-                      <%= line_item.quantity %> x <%= line_item.single_money %> = <%= line_item.display_amount %>
-                    </td>
-                  </tr>
+                <% if order.sub_orders.any? %>
+                  <% order.sub_orders.each do |sub_order| %>
+                    <% render partial: "spree/order_mailer/order_line_items", locals: {order: sub_order} %>
+                  <% end %>
+                <% else %>
+                  <% render partial: "spree/order_mailer/order_line_items", locals: {order: order} %>
                 <% end %>
                 
                 <%= render 'spree/order_mailer/subtotal', order: order %>
+                
                 <% if order.line_item_adjustments.exists? %>
                   <% if order.all_adjustments.promotion.eligible.exists? %>
                     <% order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
