@@ -6,7 +6,7 @@ require 'spree_bw_dynamic_mailer/version'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_dev_bw_dynamic_mailer'
+  s.name        = 'spree_bw_dynamic_mailer'
   s.version     = SpreeBwDynamicMailer.version
   s.summary     = 'Add extension summary here'
   s.description = 'Add (optional) extension description here'
