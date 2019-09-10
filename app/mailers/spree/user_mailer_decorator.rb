@@ -7,6 +7,8 @@ Spree::UserMailer.class_eval do
     finder_obj.translations.inspect
     I18n.locale = :en
     subject = finder_obj.subject
+    social_user_name  =  @user.email.present? ? @user.email.split("@").first : ""
+    (@user.first_name.blank? || @user.last_name.blank?) ? (@user.first_name = social_user_name) : "" 
     @single_replace_temp = Spree::Email::EmailDynamic.make_dynamic([@user],finder_obj.template)
     mail(to: @user.email, from: from_address, subject: "Welcome to Black-Line Your Number One Abaya Destination", bcc: BCC_EMAILS)
   end
