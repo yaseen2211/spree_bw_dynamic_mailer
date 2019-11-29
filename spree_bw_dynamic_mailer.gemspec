@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'spree_extension'
   s.add_dependency 'ckeditor'
-  s.add_dependency 'spree_mail_settings'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'capybara'
