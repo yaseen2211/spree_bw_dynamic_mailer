@@ -1,9 +1,9 @@
 class TranslateSpreeEmailContents < ActiveRecord::Migration[5.2]
   def  up 
-	  Spree::EmailContent.create_translation_table! :subject =>  :string ,  :template => :text 
+	  # Spree::EmailContent.create_translation_table! :subject =>  :string ,  :template => :text 
 	end
 
 	def  down 
-	  Spree::EmailContent.drop_translation_table! 
+	  # Spree::EmailContent.drop_translation_table! 
 	end
 end

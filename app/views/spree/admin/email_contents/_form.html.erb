@@ -24,7 +24,7 @@
   <div class="col-md-4" >
     <h4> Single Content Tokens </h4>
     <div style="background-color: white;height: 255px;overflow-y: scroll;">
-      <% available_tokens = Spree::Email::EmailDynamic.token_wrt_obj(f.object.module_name.split(','))%>
+      <% available_tokens = Spree::Email::EmailDynamic.token_wrt_obj([f.object.module_name])%>
       <ul>
         <% available_tokens.each do |at| %>
           <li style="font-size: 12px;"><%= at %></li>

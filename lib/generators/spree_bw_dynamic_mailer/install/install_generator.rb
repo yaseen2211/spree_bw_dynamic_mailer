@@ -10,7 +10,7 @@ module SpreeBwDynamicMailer
 
       def add_stylesheets
         inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/spree_bw_dynamic_mailer\n", before: %r{\*\/}, verbose: true
-        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_bw_dynamic_mailer\n", before: %r{\*\/}, verbose: true
+        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css.scss', " *= require spree/backend/spree_bw_dynamic_mailer\n", before: %r{\*\/}, verbose: true
       end
 
       def add_migrations
