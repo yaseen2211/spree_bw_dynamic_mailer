@@ -15,9 +15,7 @@ module Spree
     end
   end
 end
-
-
-
+::Spree::UserMailer.prepend(Spree::UserMailerDecorator)
 
 
 

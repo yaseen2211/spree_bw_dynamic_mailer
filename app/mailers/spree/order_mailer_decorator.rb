@@ -14,3 +14,4 @@ module Spree
     end
   end
 end
+::Spree::OrderMailer.prepend(Spree::OrderMailerDecorator)
