@@ -14,9 +14,16 @@ module Spree
       @user = user
       mail(to: @user.email, from: from_address, subject: "Tim Auction, Request for Change Account Credentials", bcc: BCC_EMAILS)
     end
+    def confirmation_instructions(user, token, _opts = {})
+    @confirmation_url = spree.spree_user_confirmation_url(confirmation_token: token, host: Spree::Store.current.url)
+    @email = user.email
+
+    mail to: user.email, from: from_address, subject: 'Reset Password Request'
+    end
   end
 end
 ::Spree::UserMailer.prepend(Spree::UserMailerDecorator)
 
 
 
+# mail to: user.email, from: from_address, subject: Spree::Store.current.name + ' ' + I18n.t(:subject, scope: [:devise, :mailer, :confirmation_instructions])

@@ -1,4 +1,44 @@
 
-<div>
-	<p>Congrats!!!!!   You won this auction: <%= @auction.name%>.</p>
+<!-- <div>
+	<p>Congrats!!!!!   You won this auction: <%#= @auction.name%>.</p>
 </div>
+ -->
+ <!DOCTYPE html>
+<html>
+   <%= render partial: 'spree/mailer_views/head'%>
+   <body style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+      <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+         <tr>
+            <!-- <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td> -->
+            <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; width: 580px;">
+               <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px;">
+                  <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; border-spacing: 0px; background: #ffffff;">
+                     <%= render partial: 'spree/mailer_views/header'%>
+                     <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                              <tr>
+                                 <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;">We Hi {{first_name}},
+                                    </p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Congratulations. Today's auction SOLD for ${{winner_price}} with a savings of ${{saved_price}}. Nice swipe up!</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You need to checkout the WON Auction and get it paid. Once you pay the won amount, we will ship the order after confirmation.</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">We'll be in touch shortly with the details. Thanks for playing Dropit. 
+									         </p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Regards,<br>
+                                    The DROPIT Team</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 20px;">____________________________________________</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">If you have any questions, reply to this email or contact us at support@dropitapp.com</p>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+                  <%= render partial: 'spree/mailer_views/footer'%>
+               </div>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>

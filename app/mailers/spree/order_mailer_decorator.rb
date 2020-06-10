@@ -4,14 +4,14 @@ module Spree
       @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
       subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      mail(to: @order.email, from: from_address, subject: subject)
+      mail(to: @order.email, from: from_address, subject: 'CONGRATULATIONS!! {{first_name}}, ORDER {{Order Number}} Confirmed')
     end
 
     def confirm_email_to_vendor(order, resend = false)
       @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
       subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      mail(to: @order.email, from: from_address, subject: subject)
+      mail(to: @order.email, from: from_address, subject: 'CONGRATULATIONS!! {{Vendor_name}}, ORDER {{Order Number}} Confirmed')
     end
 
 
