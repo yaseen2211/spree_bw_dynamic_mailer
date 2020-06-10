@@ -10,10 +10,10 @@ class Spree::AuctionMailer < ApplicationMailer
 		@auction       = auction
 		mail(to: @winner_email , subject: "Win Auction Notification.")
 	end
-	def sold_notification_to_superadmin(auction,admin_email)
-		@admin_email   = admin_email
+	def sold_notification_to_superadmin(auction,admin_emails)
+		@admin_emails   = admin_emails
 		@auction       = auction
-		mail(to: @admin_email , subject: "Win Auction Notification.")
+		mail(to: @admin_emails , subject: "Win Auction Notification.")
 	end
 
 	def listing_notification_to_user(auction,user_email)
