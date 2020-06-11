@@ -7,11 +7,15 @@ module Spree
       mail(to: @order.email, from: from_address, subject: 'CONGRATULATIONS!! {{first_name}}, ORDER {{Order Number}} Confirmed')
     end
 
-    def confirm_email_to_vendor(order, resend = false)
-      @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
+    def confirm_email_to_vendor(order,resend = false)
+      @order  = order.respond_to?(:id) ? order : Spree::Order.find(order)
       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-      subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      mail(to: @order.email, from: from_address, subject: 'CONGRATULATIONS!! {{Vendor_name}}, ORDER {{Order Number}} Confirmed')
+      # subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
+      subject += "CONGRATULATIONS!! {{Vendor_name}}, ORDER {{Order Number}} Confirmed"
+      
+      @vendor        = @order.auction.present? ? @order.auction.vendor : ''
+      @vendor_email  = @vendor.present? ? @vendor.user.email : ''
+      mail(to: @vendor_email, from: from_address, subject: subject)
     end
 
 
@@ -27,7 +31,6 @@ module Spree
       @order   = order
       mail(to: @order.email, from: from_address, subject: "Not Paid Winning Auction Notification")
     end
-
 
     def shipping_confirmation(order)
       @order   = order
