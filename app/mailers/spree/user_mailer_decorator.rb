@@ -7,12 +7,12 @@ module Spree
       # @single_replace_temp = Spree::Email::EmailDynamic.make_dynamic([@user],finder_obj.template)
       # @vendor_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: Spree::Store.current.url)
       # mail(to: @user.email, from: from_address, subject: "Welcome to Tim Auction")
-      mail(to: "yaseeniqbal119@gmail.com", from: from_address, subject: "Welcome to Tim Auction")
+      mail(to: "yaseeniqbal119@gmail.com", from: from_address, subject: "Welcome to DROPIT!,{{name}}!")
     end
     def vendor_welcome(user, token)
       @vendor_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: Spree::Store.current.url)
       @user = user
-      mail(to: @user.email, from: from_address, subject: "Tim Auction, Request for Change Account Credentials", bcc: BCC_EMAILS)
+      mail(to: @user.email, from: from_address, subject: "Welcome {{Vendor_name}}, Your account is now active!", bcc: BCC_EMAILS)
     end
     def confirmation_instructions(user, token, _opts = {})
     @confirmation_url = spree.spree_user_confirmation_url(confirmation_token: token, host: Spree::Store.current.url)
@@ -20,6 +20,12 @@ module Spree
 
     mail to: user.email, from: from_address, subject: 'Reset Password Request'
     end
+    def reset_password_instructions(user, token, *_args)
+      @edit_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: Spree::Store.current.url)
+
+      mail to: user.email, from: from_address, subject: 'Reset Password Request'
+    end
+
   end
 end
 ::Spree::UserMailer.prepend(Spree::UserMailerDecorator)
