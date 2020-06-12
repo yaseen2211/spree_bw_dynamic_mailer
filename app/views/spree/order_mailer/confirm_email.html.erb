@@ -16,11 +16,11 @@
                                  <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;     text-align: center;">ORDER CONFIRMATION
                                     </p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi {{first_name}},</p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for playing DROPIT! This email confirms your order. You paid {{winner_price}} and achieved a saving of {{saved price}}. Nice swipe up!!</p>
-                                    <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;">ORDER NO.320713501
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi <%= @user.first_name %>,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for playing DROPIT! This email confirms your order. You paid <%= @auction.winner_price %> and achieved a saving of <%= @auction.reserve_price %>. Nice swipe up!!</p>
+                                    <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;">ORDER NO.<%= @order.number%>
                                     </p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">19 November, 2019</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= @order.created_at %></p>
                                     <div class="shipping-email" style="background: white;">
                                       <div class="order-details" style="display: flex; margin-bottom: 15px;">
                                         <div class="shipping-address" style="width: 50%;">
@@ -28,19 +28,19 @@
                                             shipping-address
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            Mutayyab Attique
+                                            <%= @order_shipping_address.firstname %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            90-F2 wapda Town,Lahore(Back Door of Corner House)lahore.
+                                            <%= @order_shipping_address.address1 %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            54000
+                                            <%= @order_shipping_address.zipcode %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            Pakistan
+                                            <%= @order_shipping_address.country.name %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            Tel:0344 4482752
+                                            Tel: <%= @order_shipping_address.phone %>
                                           </p>
                                         </div>
                                         <div class="customer-address" style="width: 50%; text-align: right;">
@@ -48,19 +48,19 @@
                                             Customer
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            Mutayyab Attique
+                                            <%= @user_address.firstname %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            90-F2 wapda Town,Lahore(Back Door of Corner House)lahore.
+                                            <%= @user_address.address1 %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            54000
+                                            <%= @user_address.zipcode %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            Pakistan
+                                            <%= @user_address.country.name %>
                                           </p>
                                           <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            Tel:0344 4482752
+                                            Tel: <%= @user_address.phone %>
                                           </p>
                                         </div>
                                       </div>
@@ -76,18 +76,18 @@
                                             <tbody>
                                               <tr>
                                                 <td class="table-user" style="border: 1px solid #e3eaef; padding: .95rem; width: 232px;">
-                                                  Dope Slides-Black
+                                                  <%= @product.name%>
                                                 </td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; text-align: center;" >1</td>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;">Rs.2650.00</td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;"><%= @product.price %></td>
                                               </tr>
-                                              <tr>
+                                              <!-- <tr>
                                                 <td class="table-user" style="border: 1px solid #e3eaef; padding: .95rem; width: 232px;">
                                                   Lumberjack Thin Strap Slipper-EU41
                                                 </td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; text-align: center;">1</td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;">Rs.2450.00</td>
-                                              </tr>
+                                              </tr> -->
                                             </tbody>
                                         </table>
                                       </div> <!-- end table-responsive-->
@@ -96,7 +96,7 @@
                                           <thead>
                                             <tr>
                                               <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">SubTotal:</th>
-                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;">Rs.5100.00</td>
+                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.item_total  %></td>
                                             </tr>
                                           </thead>
                                             <tbody>
@@ -110,9 +110,8 @@
                                               </tr>
                                               <tr>
                                                 <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">Total:</th>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;">Rs.5100.00</td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.total  %></td>
                                               </tr>
-                                              
                                             </tbody>
                                         </table>
                                       </div> <!-- end table-responsive--> 
