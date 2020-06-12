@@ -1,32 +1,26 @@
 module Spree
   module OrderMailerDecorator 
-    def confirm_email(order, resend = false)
-      @user = order.user
-      @auction = order.auction
-      @order_shipping_address = order.shipping_address
-      @user_address = order.user.shipping_address
-      @product = @auction.variant.product
 
-      @order = order.respond_to?(:id) ? order : Spree::Order.find(order)
-      subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-      subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      mail(to: @order.email, from: from_address, subject: "CONGRATULATIONS! #{@user.first_name}, ORDER #{@order.number} Confirmed")
+    def confirm_email(order, resend = false)
+      @order                  = order.respond_to?(:id) ? order : Spree::Order.find(order)
+      @user                   = @order.try(:user)
+      @auction                = @order.try(:auction)
+      @order_shipping_address = @order.try(:shipping_address)
+      @customer_address       = @user.try(:shipping_address)
+      @product                = @auction.try(:product)
+      mail(to: @user.email, from: from_address, subject: "CONGRATULATIONS! #{@user.try(:email_name)}, ORDER #{@order.number} Confirmed")
     end
 
     def confirm_email_to_vendor(order,resend = false)
-      @auction = order.auction
-      @order_shipping_address = order.shipping_address
-      @user_address = order.user.shipping_address
-      @product = @auction.variant.product
-
-      @order  = order.respond_to?(:id) ? order : Spree::Order.find(order)
-      subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-      # subject += "#{Spree::Store.current.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      
-      
-      @vendor        = @order.auction.present? ? @order.auction.vendor : ''
-      @vendor_email  = @vendor.present? ? @vendor.user.email : ''
-      subject += "CONGRATULATIONS!! #{@vendor.name}, ORDER #{@order.number} Confirmed"
+      @order                  = order.respond_to?(:id) ? order : Spree::Order.find(order)
+      @auction                = @order.try(:auction)
+      @user                   = @order.try(:user)
+      @order_shipping_address = @order.try(:shipping_address)
+      @customer_address       = @user.try(:shipping_address)
+      @product                = @auction.try(:product)
+      @vendor                 = @auction.try(:vendor)
+      @vendor_email           = @vendor.try(:user).try(:email)
+      subject                 = "CONGRATULATIONS!! #{@vendor.name}, ORDER #{@order.number} Confirmed"
       mail(to: @vendor_email, from: from_address, subject: subject)
     end
 

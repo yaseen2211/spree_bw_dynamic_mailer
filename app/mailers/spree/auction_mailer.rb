@@ -1,26 +1,27 @@
 class Spree::AuctionMailer < ApplicationMailer
 
-	# def sold_notification_to_vendor(auction,vendor_email)
-	# 	@vendor_email = vendor_email
-	# 	@auction       = auction
-	# 	mail(to: @vendor_email , subject: "CONGRATULATIONS!! {{Vendor_name}}, {{product_name}} SOLD.")
-	# end
-	def sold_notification_to_winner(user,auction)
-		@user     = user
-		@auction  = auction
-		@product   = @auction.variant.product
-		@user_name = @user.name_by_email
-		mail(to: '@winner_email' , subject: "CONGRATULATIONS! #{@user_name}, Nice Swipe UP.")
+	def sold_notification_to_vendor(auction,vendor_email)
+		@vendor_email = vendor_email
+		@auction       = auction
+		mail(to: @vendor_email , subject: "CONGRATULATIONS!! {{Vendor_name}}, {{product_name}} SOLD.")
 	end
-	def sold_notification_to_superadmin(order)
-		user            =  order.user
-		auction         =  order.auction
-		@product        =  auction.variant.product
-		@vendor         =  @product.vendor
-		@user_name      =  user.name_by_email
-		@order          =  order
-		@admin_emails   =  admin_emails
-		mail(to: @admin_emails , subject: "DROPIT ORDER ALERT! #{@vendor.name}, #{@product.name} SOLD.")
+	def sold_notification_to_winner(auction)
+		@auction   = auction
+		@order     = @auction.try(:order)
+		@user      = @order.try(:user)
+		@product   = @auction.try(:product)
+		@user_name = @user.email_name
+		mail(to: @user.email , subject: "CONGRATULATIONS! #{@user_name}, Nice Swipe UP.")
+	end
+	def sold_notification_to_superadmin(auction,admin_users_emails)
+		@auction              =  auction
+		@order                =  @auction.try(:order)
+		user                  =  @order.user
+		@product              =  @auction.try(:product)
+		@vendor               =  @auction.try(:vendor)
+		@user_name      	  =  user.try(:email_name)
+		@admin_users_emails   =  admin_users_emails
+		mail(to: @admin_users_emails , subject: "DROPIT ORDER ALERT! #{@vendor.name}, #{@product.name} SOLD.")
 
 	end
 

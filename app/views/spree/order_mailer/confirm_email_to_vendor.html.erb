@@ -17,52 +17,24 @@
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;     text-align: center;">ORDER CONFIRMATION
                                     </p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi <%= @vendor.name %>,</p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good news!! The offer you presented for auction has SOLD for <%= @auction.winner_price %> and your share of the proceeds is {{revenue share}}. You also achieved fantastic exposure to your brand!</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good news!! The offer you presented for auction has SOLD for <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %> and your share of the proceeds is {{revenue share}}. You also achieved fantastic exposure to your brand!</p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">The details of your sale, including proceeds due to you and delivery details, are available in the Admin Panel of your account.</p>
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;">ORDER NO.<%= @order.number%>
                                     </p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= @order.created_at %></p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= @order.created_at.strftime("%m/%d/%Y") %></p>
                                     <div class="shipping-email" style="background: white;">
                                       <div class="order-details" style="display: flex; margin-bottom: 15px;">
                                         <div class="shipping-address" style="width: 50%;">
                                           <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px; text-transform: uppercase;">
                                             shipping-address
                                           </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                           <%= @order_shipping_address.firstname %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                           <%= @order_shipping_address.address1 %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            <%= @order_shipping_address.zipcode %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                             <%= @order_shipping_address.country.name %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            Tel: <%= @order_shipping_address.phone %>
-                                          </p>
+                                          <%= render partial: 'spree/order_mailer/print_address_details',locals: {address: @order_shipping_address}%>
                                         </div>
                                         <div class="customer-address" style="width: 50%; text-align: right;">
                                           <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px; text-transform: uppercase; text-align: right;">
                                             Customer
                                           </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                           <%= @user_address.firstname %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            <%= @user_address.address1 %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            <%= @user_address.zipcode %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                           <%= @user_address.country.name %>
-                                          </p>
-                                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; text-align: right;">
-                                            Tel: <%= @user_address.phone %>
-                                          </p>
+                                          <%= render partial: 'spree/order_mailer/print_address_details',locals: {address: @customer_address}%>
                                         </div>
                                       </div>
                                       <div class="table-responsive-sm" style="display: flex; justify-content: center;">
@@ -80,7 +52,7 @@
                                                   <%= @product.name%>
                                                 </td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; text-align: center;" >1</td>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;"><%= @product.price %></td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;"><%= @product.display_price.to_html %></td>
                                               </tr>
                                             </tbody>
                                         </table>
@@ -90,7 +62,7 @@
                                           <thead>
                                             <tr>
                                               <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">SubTotal:</th>
-                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.item_total  %></td>
+                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.display_item_total %></td>
                                             </tr>
                                           </thead>
                                             <tbody>
@@ -104,7 +76,7 @@
                                               </tr>
                                               <tr>
                                                 <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">Total:</th>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.total  %></td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.display_total.to_html %></td>
                                               </tr>
                                               
                                             </tbody>

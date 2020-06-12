@@ -17,12 +17,12 @@
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px; margin-top:10px ">Hi DROPIT Admin,
                                     </p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                       Vendor <%= @vendor.name %><br>
-                                       Item <%= @product.name %><br>
+                                       Vendor <%= @vendor.try(:name) %><br>
+                                       Item <%= @product.try(:name) %><br>
                                        Order No. <%= @order.number %> <br>
-                                       <%= @order.created_at %><br>
+                                       <%= @order.created_at.strftime("%m/%d/%Y")  %><br>
                                     </p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">The offer has SOLD to {{first_name}} for {{winner_price}}. Your revenue share on the sale is {{revenue share}}.</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">The offer has SOLD to <%= @user_name %> for <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %>. Your revenue share on the sale is {{revenue share}}.</p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Nice one!!  
 									         </p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you,<br>

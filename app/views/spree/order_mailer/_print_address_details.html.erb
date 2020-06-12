@@ -1,0 +1,15 @@
+<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+  <%= address.try(:firstname) %>
+</p>
+<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+  <%= address.try(:address1) %>
+</p>
+<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+  <%= address.try(:zipcode) %>
+</p>
+<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+  <%= address.try(:country).try(:name) %>
+</p>
+<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+  Tel: <%= address.try(:phone) %>
+</p>
