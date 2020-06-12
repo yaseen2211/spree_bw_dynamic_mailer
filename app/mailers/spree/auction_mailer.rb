@@ -1,19 +1,27 @@
 class Spree::AuctionMailer < ApplicationMailer
 
-	def sold_notification_to_vendor(auction,vendor_email)
-		@vendor_email = vendor_email
-		@auction       = auction
-		mail(to: @vendor_email , subject: "Sold Auction Notification.")
+	# def sold_notification_to_vendor(auction,vendor_email)
+	# 	@vendor_email = vendor_email
+	# 	@auction       = auction
+	# 	mail(to: @vendor_email , subject: "CONGRATULATIONS!! {{Vendor_name}}, {{product_name}} SOLD.")
+	# end
+	def sold_notification_to_winner(user,auction)
+		@user     = user
+		@auction  = auction
+		@product   = @auction.variant.product
+		@user_name = @user.name_by_email
+		mail(to: '@winner_email' , subject: "CONGRATULATIONS! #{@user_name}, Nice Swipe UP.")
 	end
-	def sold_notification_to_winner(auction,winner_email)
-		@winner_email = winner_email
-		@auction       = auction
-		mail(to: @winner_email , subject: "Win Auction Notification.")
-	end
-	def sold_notification_to_superadmin(auction,admin_emails)
-		@admin_emails   = admin_emails
-		@auction       = auction
-		mail(to: @admin_emails , subject: "Win Auction Notification.")
+	def sold_notification_to_superadmin(order)
+		user            =  order.user
+		auction         =  order.auction
+		@product        =  auction.variant.product
+		@vendor         =  @product.vendor
+		@user_name      =  user.name_by_email
+		@order          =  order
+		@admin_emails   =  admin_emails
+		mail(to: @admin_emails , subject: "DROPIT ORDER ALERT! #{@vendor.name}, #{@product.name} SOLD.")
+
 	end
 
 	def listing_notification_to_user(auction,user_email)
