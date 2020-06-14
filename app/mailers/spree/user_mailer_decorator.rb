@@ -9,11 +9,10 @@ module Spree
       user_name = @user.email_name
       mail(to: @user.email, from: from_address, subject: "Welcome to DROPIT!,#{user_name}!")
     end
-    def vendor_welcome(user, token)
+    def vendor_welcome(user,vendor_name)
       # @vendor_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: Spree::Store.current.url)
       @user  = user
-      vendor = user.try(:vendor)
-      mail(to: @user.email, from: from_address, subject: "Welcome #{vendor.try(:name)}, Your account is now active!", bcc: BCC_EMAILS)
+      mail(to: @user.email, from: from_address, subject: "Welcome #{vendor_name}, Your account is now active!")
     end
     
     def reset_password_instructions(user, token, *_args)
