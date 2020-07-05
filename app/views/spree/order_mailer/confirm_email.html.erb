@@ -17,7 +17,7 @@
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px;     text-align: center;">ORDER CONFIRMATION
                                     </p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi <%= @user.try(:email_name) %>,</p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 25px;">Thank you for playing DROPIT! This email confirms your order. You paid <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %> and achieved a saving of <%= Spree::Money.new(@order.adjustments.sum(&:amount), currency: @order.currency).to_html %>. Nice swipe up!!</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 25px;">Thank you for playing DROPIT! This email confirms your order. You paid <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %> and achieved a saving of <%= Spree::Money.new(@order.promo_total.try(:abs), currency: @order.currency).to_html %>. Nice swipe up!!</p>
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 10px;">ORDER NO.<%= @order.number%>
                                     </p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= @order.created_at.strftime("%d %B, %Y")  %></p>
@@ -51,7 +51,9 @@
                                                   <%= @product.name%>
                                                 </td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; text-align: center;" >1</td>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;"><%= @product.display_price.to_html %></td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;">
+                                                  <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %>
+                                                </td>
                                               </tr>
                                               <!-- <tr>
                                                 <td class="table-user" style="border: 1px solid #e3eaef; padding: .95rem; width: 232px;">
@@ -68,7 +70,9 @@
                                           <thead>
                                             <tr>
                                               <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">SubTotal:</th>
-                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.display_item_total %></td>
+                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;">
+                                                <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %>
+                                              </td>
                                             </tr>
                                           </thead>
                                             <tbody>

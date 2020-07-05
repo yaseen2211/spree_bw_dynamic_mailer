@@ -52,7 +52,9 @@
                                                   <%= @product.name%>
                                                 </td>
                                                 <td style="border: 1px solid #e3eaef; padding: .95rem; text-align: center;" >1</td>
-                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;"><%= @product.display_price.to_html %></td>
+                                                <td style="border: 1px solid #e3eaef; padding: .95rem; width: 150px;">
+                                                  <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %>
+                                                </td>
                                               </tr>
                                             </tbody>
                                         </table>
@@ -62,7 +64,9 @@
                                           <thead>
                                             <tr>
                                               <th style="border: 1px solid #e3eaef; padding: .95rem; text-align: left; width: 322px;">SubTotal:</th>
-                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;"><%= @order.display_item_total %></td>
+                                              <td style="border: 1px solid #e3eaef; padding: .95rem; width: 149px;">
+                                                <%= Spree::Money.new(@auction.try(:winner_price), currency: @order.try(:currency)) %>
+                                              </td>
                                             </tr>
                                           </thead>
                                             <tbody>
