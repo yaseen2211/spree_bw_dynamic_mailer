@@ -16,7 +16,7 @@
                                  <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                     <p style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin: 0; Margin-bottom: 15px; margin-top: 10px;">Hi <%= @user_name%>,
                                     </p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Congratulations! You were THE FIRST TO SWIPE UP and you are the winner of the <%= @product.name%>. You achieved a saving of <%= Spree::Money.new(@order.adjustments.sum(&:amount), currency: @order.currency).to_html %>. Nice swipe up!!</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Congratulations! You were THE FIRST TO SWIPE UP and you are the winner of the <%= @product.name%>. You achieved a saving of <%= Spree::Money.new(@order.promo_total, currency: @order.currency).to_html %>. Nice swipe up!!</p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You can find your purchase is in the Checkout section of your account. You need to complete your purchase by making payment.</p>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks for playing Dropit. 
 									         </p>
